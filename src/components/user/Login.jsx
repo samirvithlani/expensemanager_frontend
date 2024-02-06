@@ -18,7 +18,36 @@ import "react-toastify/dist/ReactToastify.css";
 export const Login = () => {
   const { register, handleSubmit } = useForm();
   const defaultTheme = createTheme();
-  const submitHandler = async (data) => {};
+  const navigate = useNavigate();
+  const submitHandler = async (data) => {
+
+    try{
+    const res = await axios.post("http://localhost:4000/api/user/login", data);
+    console.log(res);
+      if(res.status===200){
+        //localStorage.setItem("token",res.data.data.token);
+        localStorage.setItem("id",res.data.id);
+        toast.success("Login Success");
+        setTimeout(() => {
+          if(res.data.role.name ==="user"){
+            navigate("/user/dashboard");
+        }  
+        }, 2000);
+        
+        
+      }
+
+
+    }catch(err){
+
+
+      
+    }
+    
+
+    
+
+  };
   return (
     <ThemeProvider theme={defaultTheme}>
       <Typography
@@ -72,20 +101,6 @@ export const Login = () => {
           >
             <Box component="form" onSubmit={handleSubmit(submitHandler)}>
               <TextField
-                label="First Name"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                {...register("firstName")}
-              ></TextField>
-              <TextField
-                label="Last Name"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                {...register("lastName")}
-              ></TextField>
-              <TextField
                 label="Email"
                 variant="outlined"
                 fullWidth
@@ -106,7 +121,7 @@ export const Login = () => {
                 fullWidth
                 sx={{ mt: 2 }}
               >
-                SIGN UP
+      LOGIN
               </Button>
             </Box>
           </Grid>

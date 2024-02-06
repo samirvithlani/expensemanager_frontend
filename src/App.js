@@ -3,6 +3,9 @@ import "./App.css";
 import { Route, Routes } from "react-router-dom";
 import { Signup } from "./components/user/Signup";
 import { Login } from "./components/user/Login";
+import { Dashboard } from "./components/user/Dashboard";
+import { AddExpense } from "./components/expense/AddExpense";
+import { ListExpenses } from "./components/expense/ListExpenses";
 
 function App() {
   return (
@@ -10,6 +13,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path ="/user/dashboard" element ={<Dashboard/>}></Route>
+        <Route path = "/expense/add" element = {<AddExpense/>}/>
+        <Route path ="/expense/list" element ={<ListExpenses/>}></Route>
+
       </Routes>
     </div>
   );
