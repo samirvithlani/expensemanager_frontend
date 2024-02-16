@@ -6,10 +6,18 @@ import { Login } from "./components/user/Login";
 import { Dashboard } from "./components/user/Dashboard";
 import { AddExpense } from "./components/expense/AddExpense";
 import { ListExpenses } from "./components/expense/ListExpenses";
+import { Navbar } from "./components/Navbar";
+import { useSelector } from "react-redux";
 
 function App() {
+  const state = useSelector((state) => state.theme.theme);
+  var style ={
+    backgroundColor: state === "light" ? "white" : "black",
+  }
   return (
-    <div>
+    <div style={{backgroundColor:state ==="light"?"white":"black"}}>
+      
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
